@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const survivorControler = require('../controllers/survivors.controller');
+const survivorsController = require('../controllers/survivors.controller');
 
-router.post('/', survivorControler.criar)
+
+router.post('/', survivorsController.criar)
+
+router.get('/', survivorsController.encontrarTodos)
+
+router.get('/:id', survivorsController.encontrarPorId)
+
+router.put('/location/:id', survivorsController.atualizar)
+
+router.delete('/:id', survivorsController.deletar)
 
 module.exports = router;
-
-
-//router -- controller -- service -- repository
