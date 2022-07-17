@@ -10,8 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Survivors.hasOne(models.Infected, { foreingKey: 'survivorId'})
-      Survivors.hasOne(models.Inventory, { foreingKey: 'survivorId'})
 
     }
   }
@@ -20,7 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.INTEGER,
     sex: DataTypes.STRING,
     latitude: DataTypes.STRING,
-    longitude: DataTypes.STRING
+    longitude: DataTypes.STRING,
+    water: DataTypes.INTEGER,
+    food: DataTypes.INTEGER,
+    medication: DataTypes.INTEGER,
+    ammunition: DataTypes.INTEGER,
+    infected: DataTypes.BOOLEAN,
+    notifications: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Survivors',

@@ -28,6 +28,30 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      water: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      food: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      medication: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      ammunition: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      infected: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
+      notifications: {
+        defaultValue: 0,
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
