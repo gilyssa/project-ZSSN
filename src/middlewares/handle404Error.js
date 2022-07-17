@@ -4,3 +4,4 @@ const handle404Error = function (req, res) {
 }
 
 module.exports = handle404Error;
+
