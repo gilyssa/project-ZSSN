@@ -6,16 +6,21 @@ const criar = async function(survivor) {
     return survivorCreate;
 }
 
-const atualizar = async function(survivor, id) {
-	const existeSobrevivente = await survivorsRepository.encontrarPorId(id);
-
-	if (!existeSobrevivente) {
-		return createError(404, 'Sobrevivente não existe');
-	}
-
-	await survivorsRepository.atualizar(survivor, id);
-
+const atualizarLocal = async function(survivor, id) {
+	await survivorsRepository.atualizarLocal(survivor, id);
 	return await survivorsRepository.encontrarPorId(id);
+}
+
+
+const atualizarInfectados = async function(id) {
+	await survivorsRepository.atualizarInfectados(id);
+	return await survivorsRepository.encontrarPorId(id);
+}
+
+const puxarNotificacoes = async function (id) {
+	const survivors = await survivorsRepository.encontrarTodos();
+	return survivors;
+
 }
 
 const encontrarTodos = async function () {
@@ -25,29 +30,22 @@ const encontrarTodos = async function () {
 
 const encontrarPorId = async function (id) {
 	const survivor = await survivorsRepository.encontrarPorId(id);
-
-	if (!survivor) {
-		return createError(404,  'Sobrevivente não encontrado');
-	}
-	
 	return survivor;
+
 }
 
 const deletar = async function (id) {
 	const survivor = await survivorsRepository.encontrarPorId(id);
-
-	if (!survivor) {
-		return createError(404,  'Sobrevivente não encontrado');
-	}
-
 	await survivorsRepository.deletar(id);
 	return survivor;
 }
 
 module.exports = {
 	criar: criar,
-	atualizar: atualizar,
+	atualizarLocal: atualizarLocal,
 	encontrarTodos: encontrarTodos,
 	encontrarPorId: encontrarPorId,
 	deletar: deletar,
+	atualizarInfectados: atualizarInfectados,
+	puxarNotificacoes: puxarNotificacoes,
 }

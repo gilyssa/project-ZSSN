@@ -9,7 +9,9 @@ router.get('/', survivorsController.encontrarTodos)
 
 router.get('/:id', survivorsController.encontrarPorId)
 
-router.put('/location/:id', survivorsController.atualizar)
+router.put('/location/:id', survivorsController.atualizarLocal)
+
+router.put('/notification/:id', survivorsController.atualizarInfectados)
 
 router.delete('/:id', survivorsController.deletar)
 
