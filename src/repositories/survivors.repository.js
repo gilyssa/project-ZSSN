@@ -14,26 +14,11 @@ const atualizarLocal =  async function(survivor, id) {
 
 const atualizarInfectados =  async function( id) {
 	const { QueryTypes } = require('sequelize');
-
-	if (await sequelize.query('select notifications from Survivors where id = :id', { 
-		replacements: {id: id},
-		type: QueryTypes.SELECT 
-	
-	}) >= 3){
-
-		await sequelize.query('update Survivors set infected = true where id = :id', { 
+	await sequelize.query('update Survivors set infected = true where id = :id', { 
 			replacements: {id: id},
 			type: QueryTypes.UPDATE 
 				
 		});
-	}
-
-	await sequelize.query('update Survivors set notifications = notifications + 1 where id = :id', { 
-		replacements: {id: id},
-		type: QueryTypes.UPDATE 
-	
-	});
-
 }
 
 const encontrarTodos = async function() {
