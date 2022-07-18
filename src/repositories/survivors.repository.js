@@ -1,4 +1,4 @@
-const { Survivors } = require("../database/models/index");
+const { Survivors, sequelize } = require("../database/models/index");
 
 const criar = async function(survivor) {
 	const survivorCriado = await Survivors.create(survivor);
@@ -6,21 +6,46 @@ const criar = async function(survivor) {
 }
 
 
-const atualizar =  async function(survivor, id) {
+const atualizarLocal =  async function(survivor, id) {
 	await Survivors.update(survivor, {
 		where: { id: id }
 	});
 }
 
+const atualizarInfectados =  async function( id) {
+	const { QueryTypes } = require('sequelize');
+
+	if (await sequelize.query('select notifications from Survivors where id = :id', { 
+		replacements: {id: id},
+		type: QueryTypes.SELECT 
+	
+	}) >= 3){
+
+		await sequelize.query('update Survivors set infected = true where id = :id', { 
+			replacements: {id: id},
+			type: QueryTypes.UPDATE 
+				
+		});
+	}
+
+	await sequelize.query('update Survivors set notifications = notifications + 1 where id = :id', { 
+		replacements: {id: id},
+		type: QueryTypes.UPDATE 
+	
+	});
+
+}
+
 const encontrarTodos = async function() {
-	const survivors = await Survivors.findAll();
-	return survivors;
+	const survivor = await Survivors.findAll();
+	return survivor;
 }
 
 const encontrarPorId = async function(id) {
 	const survivor = await Survivors.findByPk(id);
 	return survivor;
 }
+
 
 const encontrarUmPorWhere = async function(where) {
 	const survivor = await Survivors.findOne({
@@ -29,15 +54,17 @@ const encontrarUmPorWhere = async function(where) {
 	return survivor;
 }
 
+
 const deletar = async function (id) {
 	return await Survivors.destroy({ where: { id: id } });
 }
 
 module.exports = {
 	criar: criar,
-	atualizar: atualizar,
+	atualizarLocal: atualizarLocal,
 	encontrarTodos: encontrarTodos,
 	encontrarPorId: encontrarPorId,
 	encontrarUmPorWhere: encontrarUmPorWhere,
 	deletar: deletar,
+	atualizarInfectados: atualizarInfectados,
 }
