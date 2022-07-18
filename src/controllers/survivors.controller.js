@@ -31,7 +31,6 @@ const atualizarInfectados = async function(req, res) {
 }
 
 
-
 const encontrarTodos = async function (req, res) {
 		const response = await survivorsService.encontrarTodos();
 		res.send(response);

@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     medication: DataTypes.INTEGER,
     ammunition: DataTypes.INTEGER,
     infected: DataTypes.BOOLEAN,
-    notifications: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Survivors',
