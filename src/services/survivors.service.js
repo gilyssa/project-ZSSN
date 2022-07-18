@@ -17,11 +17,6 @@ const atualizarInfectados = async function(id) {
 	return await survivorsRepository.encontrarPorId(id);
 }
 
-const puxarNotificacoes = async function (id) {
-	const survivors = await survivorsRepository.encontrarTodos();
-	return survivors;
-
-}
 
 const encontrarTodos = async function () {
 	const survivors = await survivorsRepository.encontrarTodos();
@@ -47,5 +42,4 @@ module.exports = {
 	encontrarPorId: encontrarPorId,
 	deletar: deletar,
 	atualizarInfectados: atualizarInfectados,
-	puxarNotificacoes: puxarNotificacoes,
 }

@@ -38,11 +38,6 @@ const encontrarTodos = async function (req, res) {
 }
 
 
-const puxarNotificacoes = async function (req, res) {
-		const response = await survivorsService.puxarNotificacoes(req.params.id);
-		res.send(response);
-	
-}
 
 const encontrarPorId = async function (req, res) {
 		const response = await survivorsService.encontrarPorId(req.params.id);
@@ -63,5 +58,4 @@ module.exports = {
 	atualizarLocal: atualizarLocal,
 	deletar: deletar,
 	atualizarInfectados: atualizarInfectados,
-	puxarNotificacoes: puxarNotificacoes
 }
